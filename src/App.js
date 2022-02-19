@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Example from './components/Example'
+import Minter from './components/Minter'
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container-fluid app-holder">
+
+        <div className="row justify-content-center">
+
+          <Example num={1} className="item col-xl-3 col-lg-4 col-sm-12"></Example>
+
+          <Minter className="item col-xl-6 col-lg-4 col-sm-12"></Minter>
+
+          <Example num={2} className="item col-xl-3 col-lg-4 col-sm-12"></Example>
+
+        </div>
+
+        </div>
     </div>
   );
 }

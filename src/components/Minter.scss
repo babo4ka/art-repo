@@ -1,0 +1,99 @@
+.minter{
+    min-height: 400px;
+}
+
+#robot_img{
+    width: 100px;
+    height: 100px;
+}
+
+.greeting_holder{
+    text-align: left;
+    padding-left: 25px;
+
+    margin-top: 10px;
+}
+
+.robot_talk_holder{
+    margin-top: 10px;
+}
+
+.price_talk{
+    margin-left: 50px;
+    max-width: 350px;
+}
+
+.minting_holder{
+    margin-top: 50px;
+}
+
+.OR{
+    text-align: center;
+    font-size: 35px;
+}
+
+.any_price_mint_holder{
+    text-align: center;
+}
+
+.any_price_mint_item{
+    margin: 10px 0px;
+}
+
+#price_enter{
+    background-color: #f5f5f500;
+
+    border: .5px solid black;
+
+    border-radius: 5px;
+
+    text-align: center;
+
+    width: 50%;
+
+    color: white;
+
+    height: 35px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+
+.mint_btn{
+    border: none;
+    background-color: rgba(107, 107, 107, 0.15);
+
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+
+    border-radius: 5px;
+
+    height: 50px;
+    padding: 0px 25px;
+    color: white;
+
+    font-weight: bold;
+}
+
+#any_price_mint_btn{
+    min-width: 150px;
+}
+
+.mint_btn:hover{
+    box-shadow: inset 0px 0px 10px 2px rgba(0, 72, 139, 0.25);
+}
+
+.mint_item{
+    text-align: center;
+}
+
+@media (max-width:510px){
+    .mint_item{
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}

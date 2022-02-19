@@ -1,0 +1,14 @@
+.app-holder{
+    margin-top: 250px;
+}
+
+.item{
+    margin: 0px 15px;
+}
+
+@media (max-width:992px){
+    .item{
+        margin:15px 15px;
+    }
+}
+
