@@ -3,7 +3,13 @@ import robot_img from '../robot.png';
 import { useEffect, useState } from 'react';
 import SoldOut from './SoldOut';
 
-import { connectWallet, getCurrentWalletConnected } from '../utils/interact';
+import { 
+    connectWallet, 
+    getCurrentWalletConnected,
+    mint,
+    getMaxSupply,
+    getTotalSupply
+    } from '../utils/interact';
 
 const Minter = (props)=>{
     
@@ -51,6 +57,34 @@ const Minter = (props)=>{
     const [walletConnected, setWalletConnected] = useState(false);
     const [isSoldOut, setIsSoldOut] = useState(false);
 
+    const [userPrice, setUserPrice] = useState(1);
+    const enter_price = document.getElementById('price_enter');
+
+
+    const onMintPressed = async(cost)=>{
+        const {success, status} = await mint(cost);
+
+        setStatus(status);
+    }
+
+    
+
+
+    const [maxSupply, setMaxSupply] = useState(0);
+    const [totalSupply, setTotalSupply] = useState(0);
+
+    
+    useEffect(async()=>{
+        const {maxSupply} = await getMaxSupply();
+        const {totalSupply} = await getTotalSupply();
+        if(totalSupply == 375){
+            setIsSoldOut(true);
+        }
+
+        setMaxSupply(maxSupply);
+        setTotalSupply(totalSupply);
+    }, [])
+
     return(
 
         <div className={className}>
@@ -74,6 +108,15 @@ const Minter = (props)=>{
                         </div>
                     </div>
 
+                    {/* количество токенов */}
+                    <div className='container'>
+                        <div className='row justify-content-center'>
+                            <div className='col-6 total_b'>
+                                You already bought <strong className="count">{totalSupply}</strong> of <strong className="count">{maxSupply}</strong> MTTBAs, Thanks!!!
+                            </div>
+                        </div>
+                    </div>
+
                     {/* чеканка */}
                     {wallet != ""? (
                         <div className="col-12 container minting_holder">
@@ -86,7 +129,7 @@ const Minter = (props)=>{
                                             <input id="price_enter" className="any_price_mint_item" type="number" placeholder='Enter price'></input>
                                         </div>
                                         <div className="col-12">
-                                            <button id="any_price_mint_btn" className="any_price_mint_item mint_btn">MINT</button>
+                                            <button onClick={()=>onMintPressed(enter_price.value)} id="any_price_mint_btn" className="any_price_mint_item mint_btn">MINT</button>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +137,7 @@ const Minter = (props)=>{
                                 <h1 className="col col-lg-12 col-xl OR mint_item">OR</h1>
                                 {/* чеканка за фиксированную цену */}
                                 <div className="col col-lg-12 col-xl mint_item">
-                                    <button className="mint_btn">MINT for 1 MATIC</button>
+                                    <button onClick={()=>onMintPressed(1)} className="mint_btn">MINT for 1 MATIC</button>
                                 </div>
                             </div>
                         </div>
