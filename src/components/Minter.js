@@ -67,8 +67,6 @@ const Minter = (props)=>{
         setStatus(status);
     }
 
-    
-
 
     const [maxSupply, setMaxSupply] = useState(0);
     const [totalSupply, setTotalSupply] = useState(0);
