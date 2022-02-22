@@ -9,12 +9,12 @@ const contractAddress = "0xfAB98F673273eFcA35A5e83C63758375ee31eC3D";
 export const mint = async (cost)=>{
   const chainId = await window.ethereum.request({ method: 'eth_chainId' });
 
-  // if(chainId != 4){
-  //   return{ 
-  //     success:false,
-  //     status: "Switch to Rinkeby test network"
-  //   }
-  // }
+  if(chainId != 4){
+    return{ 
+      success:false,
+      status: "Switch to Rinkeby test network"
+    }
+  }
 
   window.contract = await new web3.eth.Contract(contractABI, contractAddress);
 
