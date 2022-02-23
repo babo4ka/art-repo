@@ -134,7 +134,7 @@ const Minter = (props)=>{
                                 <h1 className="col col-lg-12 col-xl OR mint_item">OR</h1>
                                 {/* чеканка за фиксированную цену */}
                                 <div className="col col-lg-12 col-xl mint_item">
-                                    <button onClick={()=>onMintPressed(0.005)} className="mint_btn">MINT for 1 MATIC</button>
+                                    <button onClick={()=>onMintPressed(1)} className="mint_btn">MINT for 1 MATIC</button>
                                 </div>
                             </div>
                         </div>

@@ -1,20 +1,28 @@
 import Web3 from "web3";
 
-export const web3 = new Web3("https://speedy-nodes-nyc.moralis.io/9fcfea6f5970d20ff23ae056/eth/rinkeby");
+export const web3 = new Web3("https://speedy-nodes-nyc.moralis.io/9fcfea6f5970d20ff23ae056/polygon/mainnet");
 
 const contractABI = require("../contract_abi.json");
-const contractAddress = "0xfAB98F673273eFcA35A5e83C63758375ee31eC3D";
+const contractAddress = "0xac2a5faa633d7b715a5835645492f763fc7272b3";
 
 
 export const mint = async (cost)=>{
-  const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-
-  if(chainId != 4){
-    return{ 
+  if(cost < 1){
+    return{
       success:false,
-      status: "Switch to Rinkeby test network"
+      status: "Please, buy it at least for 1 MATIC :("
     }
   }
+
+  const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+  if(chainId != 137){
+    return{ 
+      success:false,
+      status: "Switch to Polygon Mainnet"
+    }
+  }
+  
 
   window.contract = await new web3.eth.Contract(contractABI, contractAddress);
 
