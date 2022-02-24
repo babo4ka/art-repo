@@ -46,13 +46,12 @@ const Minter = (props)=>{
 
     const className = "minter container " + props.className;
 
-    const greeting_txt = "Hi! My name is Marco! I do not know who made me :( I just woke up in a dump." +
-        "I was confused, I know nothing about everything around me, exepting some information that was embedded inside me." +
-        "But I found some interesting here! It is called paintings." +
-        "I liked it so much, so I decided to make my own, and I want to show them to you :) Meet My Try To Be Artist"
+    const greeting_txt = "Hello, world! That's my test NFT project. 375 randomly drawed pictures. I guess it has no value, I created it just to look how it works. " +
+    "You can take buying these pictures as support for possible future projects. Or just make me feel that it wasn't time wasting :D "+
+    "Just 1 MATIC or any amount you don't mind :)"
 
-    const price_txt = "You can offer any price you want, or just buy it for 1 MATIC "+
-    "I will be glad if you estimate my first efforts"
+    // const price_txt = "You can offer any price you want, or just buy it for 1 MATIC "+
+    // "I will be glad if you estimate my first efforts"
 
     const [isSoldOut, setIsSoldOut] = useState(false);
 
@@ -92,7 +91,7 @@ const Minter = (props)=>{
                     
                     <div className="col-12 greeting_holder">{greeting_txt}</div>
 
-                    <div className="col-12 container-fluid">
+                    {/* <div className="col-12 container-fluid">
 
                         <div className="row robot_talk_holder">
 
@@ -103,13 +102,13 @@ const Minter = (props)=>{
                             <div className="col-6 price_talk">{price_txt}</div>
 
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* количество токенов */}
                     <div className='container'>
                         <div className='row justify-content-center'>
-                            <div className='col-6 total_b'>
-                                You already bought <strong className="count">{totalSupply}</strong> of <strong className="count">{maxSupply}</strong> MTTBAs, Thanks!!!
+                            <div className='col-6 total_b mt-5'>
+                                <strong className="count">{totalSupply}</strong> of <strong className="count">{maxSupply}</strong> MTTBAs are minted!
                             </div>
                         </div>
                     </div>

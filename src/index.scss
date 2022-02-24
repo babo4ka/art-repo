@@ -6,9 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: #0F0A29;
+  // background-color: #8b733e;
+  background: linear-gradient(155deg, rgba(4,0,77,1) 0%, rgba(58,0,119,1) 36%, rgb(78, 17, 0) 100%);
 
-  color: rgb(209, 209, 209);
+  color: rgb(190, 190, 190);
 
   font-size: 15px;
 }
