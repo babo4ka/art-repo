@@ -1,4 +1,3 @@
-import robot_img from '../robot.png';
 import './SoldOut.scss'
 
 const SoldOut = ()=>{

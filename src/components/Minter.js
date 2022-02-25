@@ -1,5 +1,4 @@
 import './Minter.scss'
-import robot_img from '../robot.png';
 import { useEffect, useState } from 'react';
 import SoldOut from './SoldOut';
 
@@ -9,18 +8,21 @@ import {
     mint,
     getMaxSupply,
     getTotalSupply
-    } from '../utils/interact';
+    } from '../utils/interact.js';
 
 const Minter = (props)=>{
     
     const [wallet, setWallet] = useState();
     const [status, setStatus] = useState();
+    const [walletConnected, setWalletConnected] = useState(false);
 
     useEffect(async()=>{
         const {address, status} = await getCurrentWalletConnected();
         setWallet(address);
         setStatus(status);
-
+        if(wallet != ""){
+            setWalletConnected(true);
+        }
         addWalletListener();
     }, [])
 
@@ -29,8 +31,10 @@ const Minter = (props)=>{
           window.ethereum.on("accountsChanged", (accounts) => {
             if (accounts.length > 0) {
               setWallet(accounts[0]);
+              setWalletConnected(true);
             } else {
               setWallet("");
+              setWalletConnected(false);
             }
           });
         } else {
@@ -42,6 +46,10 @@ const Minter = (props)=>{
         const walletResponse = await connectWallet();
         setStatus(walletResponse.status);
         setWallet(walletResponse.address);
+
+        if(walletResponse.wallet == ""){
+            setWalletConnected(false);
+        }
     };
 
     const className = "minter container " + props.className;
@@ -50,19 +58,18 @@ const Minter = (props)=>{
     "You can take buying these pictures as support for possible future projects. Or just make me feel that it wasn't time wasting :D "+
     "Just 1 MATIC or any amount you don't mind :)"
 
-    // const price_txt = "You can offer any price you want, or just buy it for 1 MATIC "+
-    // "I will be glad if you estimate my first efforts"
 
     const [isSoldOut, setIsSoldOut] = useState(false);
 
-    const [userPrice, setUserPrice] = useState(1);
     const enter_price = document.getElementById('price_enter');
 
 
     const onMintPressed = async(cost)=>{
+        console.log(walletConnected)
         const {success, status} = await mint(cost);
 
         setStatus(status);
+
     }
 
 
@@ -91,18 +98,6 @@ const Minter = (props)=>{
                     
                     <div className="col-12 greeting_holder">{greeting_txt}</div>
 
-                    {/* <div className="col-12 container-fluid">
-
-                        <div className="row robot_talk_holder">
-
-                            <div className="col-2">
-                                <img id="robot_img" src={robot_img}></img>
-                            </div>
-
-                            <div className="col-6 price_talk">{price_txt}</div>
-
-                        </div>
-                    </div> */}
 
                     {/* количество токенов */}
                     <div className='container'>
@@ -114,7 +109,7 @@ const Minter = (props)=>{
                     </div>
 
                     {/* чеканка */}
-                    {wallet != ""? (
+                    {walletConnected == true? (
                         <div className="col-12 container minting_holder">
 
                             <div className="row">
