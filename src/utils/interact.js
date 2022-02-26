@@ -80,7 +80,9 @@ export const getTotalSupply = async()=>{
 
 
 export const connectWallet = async () => {
+  console.log("hello from connect wallet 1")
   if (window.ethereum) {
+    console.log("hello from connect wallet 2")
     try {
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -105,7 +107,9 @@ export const connectWallet = async () => {
 };
 
 export const getCurrentWalletConnected = async () => {
+  console.log("hello from get wallet 1")
   if (window.ethereum) {
+    console.log("hello from get wallet 2")
     try {
       const addressArray = await window.ethereum.request({
         method: "eth_accounts",

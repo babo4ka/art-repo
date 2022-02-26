@@ -14,16 +14,23 @@ const Minter = (props)=>{
     
     const [wallet, setWallet] = useState();
     const [status, setStatus] = useState();
-    const [walletConnected, setWalletConnected] = useState(false);
 
     useEffect(async()=>{
         const {address, status} = await getCurrentWalletConnected();
         setWallet(address);
         setStatus(status);
-        if(wallet != ""){
-            setWalletConnected(true);
-        }
+
         addWalletListener();
+
+        const {maxSupply} = await getMaxSupply();
+        const {totalSupply} = await getTotalSupply();
+        if(totalSupply == 375){
+            setIsSoldOut(true);
+        }else{
+            setMaxSupply(maxSupply);
+            setTotalSupply(totalSupply);
+        }
+
     }, [])
 
     function addWalletListener() {
@@ -31,10 +38,8 @@ const Minter = (props)=>{
           window.ethereum.on("accountsChanged", (accounts) => {
             if (accounts.length > 0) {
               setWallet(accounts[0]);
-              setWalletConnected(true);
             } else {
               setWallet("");
-              setWalletConnected(false);
             }
           });
         } else {
@@ -47,9 +52,6 @@ const Minter = (props)=>{
         setStatus(walletResponse.status);
         setWallet(walletResponse.address);
 
-        if(walletResponse.wallet == ""){
-            setWalletConnected(false);
-        }
     };
 
     const className = "minter container " + props.className;
@@ -65,7 +67,7 @@ const Minter = (props)=>{
 
 
     const onMintPressed = async(cost)=>{
-        console.log(walletConnected)
+        console.log("hello from mint pressed")
         const {success, status} = await mint(cost);
 
         setStatus(status);
@@ -77,17 +79,6 @@ const Minter = (props)=>{
     const [totalSupply, setTotalSupply] = useState(0);
 
     
-    useEffect(async()=>{
-        const {maxSupply} = await getMaxSupply();
-        const {totalSupply} = await getTotalSupply();
-        if(totalSupply == 375){
-            setIsSoldOut(true);
-        }
-
-        setMaxSupply(maxSupply);
-        setTotalSupply(totalSupply);
-    }, [])
-
     return(
 
         <div className={className}>
@@ -109,7 +100,7 @@ const Minter = (props)=>{
                     </div>
 
                     {/* чеканка */}
-                    {walletConnected == true? (
+                    {wallet != ""? (
                         <div className="col-12 container minting_holder">
 
                             <div className="row">
